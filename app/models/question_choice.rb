@@ -4,4 +4,8 @@ class QuestionChoice < ApplicationRecord
 
   validates :text, :question, :creative_quality, presence: true
   validates :score, numericality: { only_integer: true }
+  
+  def feedback
+    "#{self.creative_quality.name} #{self.score}"
+  end
 end

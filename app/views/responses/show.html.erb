@@ -29,6 +29,19 @@
                 <strong>
                   <%= question_choice.text %>
                 </strong>
+                <% if question_choice.score > 0 %>  
+                  <div class="text-success">
+                    <strong><%= question_choice.feedback %></strong>
+                  </div>
+                <% elsif question_choice.score < 0 %>
+                  <div class="text-danger">
+                    <strong><%= question_choice.feedback %></strong>
+                  </div>
+                <% else %>
+                  <div>
+                    <strong><%= question_choice.feedback %></strong>
+                  </div>
+                <% end %>
               <% else %>
                 <span class="text-muted">
                   <%= question_choice.text %>
