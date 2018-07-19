@@ -15,6 +15,10 @@ module ApplicationHelper
   end
   
   class NormalizedScores
+    
+    MIN = -100
+    MAX = 100
+    
     def initialize(responses, cq_name)
       @responses = responses
       @cq_name = cq_name
@@ -39,9 +43,9 @@ module ApplicationHelper
     def normalized_score
       score = ((total_raw.to_f / total_max.to_f) * 100).round
       if score < -100 then 
-        return -100
+        return MIN
       elsif score > 100 then 
-        return 100
+        return MAX
       end
       return score
     end
