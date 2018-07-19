@@ -48,4 +48,37 @@ describe Response do
       end
     end
   end
+  
+  context 'score calculations' do
+    let(:creative_quality) {CreativeQuality.new(name: 'empowerment')}
+    
+    let(:question) {Question.new}
+                     
+    let(:question_choices) {[QuestionChoice.new(text: 'test',
+                                               question: question,
+                                               creative_quality: creative_quality,
+                                               score: 2),
+                             QuestionChoice.new(text: 'test2',
+                                               question: question,
+                                               creative_quality: creative_quality,
+                                               score: 4)]}
+    
+    let(:question_response) {QuestionResponse.new(question_choice: question_choices[0])}
+    
+    let(:response) { Response.new(question_responses: [question_response])}
+                           
+    describe '#raw_score' do 
+      it 'gets the correct raw score from question choices' do 
+        question.question_choices = question_choices
+        expect(response.raw_score('empowerment')).to eql(2)
+      end
+    end
+    
+    describe '#max_score' do 
+      it 'gets the max score from question choices' do 
+        question.question_choices = question_choices
+        expect(response.max_score('empowerment')).to eql(4)
+      end
+    end
+  end
 end
