@@ -34,7 +34,7 @@
               <hr>
 
               <p>
-                <strong>Your Score: _______</strong>
+                <strong>Your Score: <%= ApplicationHelper::NormalizedScores.new(@responses, creative_quality.name).normalized_score %></strong>
               </p>
             </div>
           </div>
